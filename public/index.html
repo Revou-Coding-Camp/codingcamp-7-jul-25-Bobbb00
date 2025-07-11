@@ -5,24 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Revou To-DoList</title>
     <link rel="stylesheet" href="css/output.css" />
+    <link
+      href="https://cdn.boxicons.com/fonts/transformations.min.css"
+      rel="stylesheet"
+    />
   </head>
   <body class="h-screen">
     <!-- header -->
     <nav class="navbar flex-none">
       <details class="dropdown dropdown-right">
-        <summary tabindex="0" class="btn btn-square btn-ghost">
+        <summary tabindex="0" class="btn btn-circle btn-ghost">
           <div class="w-10 rounded-full">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              fill="none"
+              width="40"
+              height="40"
+              fill="currentColor"
               viewBox="0 0 24 24"
-              class="inline-block w-6 h-6 stroke-current"
             >
+              <!--Boxicons v3.0 https://boxicons.com | License  https://docs.boxicons.com/free-->
               <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M4 6h16M4 12h16M4 18h16"
+                d="M12 2c-4.96 0-9 4.04-9 9v8h.05c.25 1.69 1.69 3 3.45 3 1.17 0 2.07-.42 2.67-1.17.72.72 1.72 1.17 2.83 1.17s2.11-.46 2.84-1.19c.6.76 1.5 1.19 2.66 1.19 1.93 0 3.5-1.57 3.5-3.5V11c0-4.96-4.04-9-9-9M8.5 12c-.83 0-1.5-.67-1.5-1.5S7.67 9 8.5 9s1.5.67 1.5 1.5S9.33 12 8.5 12m7 0c-.83 0-1.5-.67-1.5-1.5S14.67 9 15.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5"
               ></path>
             </svg>
           </div>
@@ -41,9 +44,75 @@
       </details>
     </nav>
     <!-- hero section -->
-    <main class="flex flex-col items-center justify-evenly min-h-screen">
+    <section class="flex flex-col items-center justify-evenly min-h-96">
       <header class="text-3xl font-bold">To-DoList - Ali</header>
-    </main>
+
+      <main class="py-10 px-10 rounded-box shadow-chunky bg-base-200">
+        <!-- To do Input -->
+        <form class="flex justify-between p-2">
+          <div class="flex gap-2">
+            <input
+              type="text"
+              id="task-input"
+              class="border rounded p-1 bg-white text-black"
+              placeholder="Add Task"
+            />
+            <input
+              type="date"
+              id="due-date-input"
+              class="border rounded p-1 bg-white text-black"
+              placeholder="Due date"
+            />
+
+            <button
+              type="button"
+              id="add-task-button"
+              class="btn btn-ghost"
+              onclick="addTask()"
+            >
+              Add
+            </button>
+          </div>
+        </form>
+
+        <!-- Todo Action -->
+        <section class="flex justify-between p-2">
+          <div class="flex gap-2">
+            <button
+              type="button"
+              id="clear-completed-button"
+              class="btn btn-ghost"
+            >
+              Show Completed
+            </button>
+            <button
+              type="button"
+              id="clear-all-button"
+              class="btn btn-ghost"
+              onclick="deleteAllTasks()"
+            >
+              Clear All
+            </button>
+          </div>
+        </section>
+        <!-- Todo List -->
+        <section class="m-auto text-center">
+          <header>
+            <h2 class="text-2xl font-bold">Tasks</h2>
+          </header>
+          <!-- Task List -->
+          <div id="task-list">
+            <p>Task is Empty!</p>
+          </div>
+        </section>
+      </main>
+    </section>
+    <!-- footer -->
+    <footer class="footer footer-center p-4 text-base-content">
+      <aside>
+        <p>Copyright © 2025 - All right reserved by Syafa Ali Azmi</p>
+      </aside>
+    </footer>
 
     <!-- script -->
     <script src="js/script.js"></script>

@@ -4,7 +4,15 @@ module.exports = {
     "./public/**/*.{html,js}", // <<< Ini adalah lokasi file HTML/JS Anda
   ],
   theme: {
-    extend: {},
+    extend: {
+      boxShadow: {
+        chunky:
+          "3px 3px 0 0 var(--color-base-300), 6px 6px 0 0 var(--color-base-200)",
+        "chunky-sm": "2px 2px 0 0 var(--color-base-300)",
+        "chunky-btn":
+          "2px 2px 0 0 var(--color-primary), 4px 4px 0 0 var(--color-primary-content)", // Contoh untuk tombol
+      },
+    },
   },
   plugins: [require("daisyui")],
 
