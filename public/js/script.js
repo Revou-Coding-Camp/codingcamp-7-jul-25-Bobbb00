@@ -46,7 +46,7 @@ function addTask() {
 
   // validate inputs
   if (taskInput.value === "" || dueDateInput.value === "") {
-    alert("Please fill in all fields");
+    alert("Please fill in all fieldszz");
     return;
   } else {
     const newTask = {
@@ -112,38 +112,36 @@ function deleteAllTasks() {
   displayTasks(); // Refresh the displayed task list
 }
 
-function toggleTaskCompletion(id) {
-  // Find the task by ID
-  const task = tasks.find((task) => task.id === id);
-  if (task) {
-    // Toggle the completed status
-    task.completed = !task.completed;
+// Function Edit Task
+function editTask(id) {
+  const taskToEdit = tasks.find((task) => task.id === id);
+  if (taskToEdit) {
+    const taskInput = document.getElementById("task-input");
+    const dueDateInput = document.getElementById("due-date-input");
+    taskInput.value = taskToEdit.task;
+    dueDateInput.value = taskToEdit.dueDate;
+
+    // Remove the task from the tasks array
+    tasks = tasks.filter((task) => task.id !== id);
     displayTasks(); // Refresh the displayed task list
   }
 }
 
-// function edit task
-function editTask(id) {
-  // Find the task by ID
-  const task = tasks.find((task) => task.id === id);
-  if (task) {
-    // Open a prompt to edit the task
-    const newTask = prompt("Enter the new task:", task.task);
-    const newDueDate = prompt("Enter the new due date:", task.dueDate);
-    if (newTask && newDueDate) {
-      // Update the task in the tasks array
-      task.task = newTask;
-      task.dueDate = newDueDate;
-      displayTasks(); // Refresh the displayed task list
-    }
+// Function to toggle task completion<div id="task-list">
+
+function toggleTaskCompletion(id) {
+  const taskToToggle = tasks.find((task) => task.id === id);
+  if (taskToToggle) {
+    taskToToggle.completed = !taskToToggle.completed;
+    displayTasks(); // Refresh the displayed task list
   }
 }
 
-// function to show completed
+// Funtion to Show Completed Task
 function showCompletedTasks() {
+  const completedTasks = tasks.filter((task) => task.completed);
   const taskList = document.getElementById("task-list");
   taskList.innerHTML = ""; // Clear the current list
-  const completedTasks = tasks.filter((task) => task.completed);
   completedTasks.forEach((element) => {
     const taskItem = `
         <div class="flex justify-between items-center p-[8px] border-b">
@@ -151,17 +149,14 @@ function showCompletedTasks() {
                 <span class="text-lg">${element.task}</span>
                 <span class="text-sm text-gray-500">${element.dueDate}</span>
             </div>
-            <button class="bg-green-500 text-white p-[4px] rounded" onclick="toggleTaskCompletion(${
-              element.id
-            })">${element.completed ? "Undo" : "Complete"}</button>
-            <button class="bg-red-500 text-white p-[4px] rounded" onclick="deleteTask(${
-              element.id
-            })">Delete</button>
-            <button class="bg-yellow-500 text-white p-[4px] rounded" onclick="editTask(${
-              element.id
-            })">Edit</button>
+            <button class="bg-red-500 text-white p-[4px] rounded" onclick="deleteTask(${element.id})">Delete</button>
+            <button class="bg-green-500 text-white p-[4px] rounded" onclick="toggleTaskCompletion(${element.id})">Undo</button>
         </div>
         `;
     taskList.innerHTML += taskItem;
   });
+
+  if (completedTasks.length === 0) {
+    taskList.innerHTML = "<p>No completed tasks</p>";
+  }
 }
